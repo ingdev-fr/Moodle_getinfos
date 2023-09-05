@@ -26,8 +26,7 @@ class block_getinfos extends block_base
     /**
      * Initializes class member variables.
      */
-    public function init()
-    {
+    public function init(){
         // Needed by Moodle to differentiate between blocks.
         $this->title = get_string(identifier: 'pluginname', component: 'block_getinfos');
     }
