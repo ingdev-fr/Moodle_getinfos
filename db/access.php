@@ -24,14 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// ------------- Définition de qui a le droit de créer ou d'ajouter ce bloc -------------
+// ------------- Définition de qui a le droit de créer ou d'ajouter ce bloc -------------.
 $capabilities = array(
-    // Sur le tableau de bord utilisateur
+    // Sur le tableau de bord utilisateur.
     'block/getinfos:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
-            'user' => CAP_ALLOW // L'utilisateur a le droit sur son tableau de bord
+            'user' => CAP_ALLOW // L'utilisateur a le droit sur son tableau de bord.
         ),
 
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
@@ -44,7 +44,8 @@ $capabilities = array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
-            'editingteacher' => CAP_ALLOW, //le formateur éditeur et le manager ont le droit d'instancier le bloc sur le site
+            'editingteacher' => CAP_ALLOW,
+            //le formateur éditeur et le manager ont le droit d'instancier le bloc sur le site.
             'manager' => CAP_ALLOW
         ),
 

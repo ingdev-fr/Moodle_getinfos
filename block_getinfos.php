@@ -21,14 +21,15 @@
  * @copyright   2023 INGDEV <damien.will@ingdev.fr>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_getinfos extends block_base {
-
+class block_getinfos extends block_base
+{
     /**
      * Initializes class member variables.
      */
-    public function init() {
+    public function init()
+    {
         // Needed by Moodle to differentiate between blocks.
-        $this->title = get_string(identifier:'pluginname', component:'block_getinfos');
+        $this->title = get_string(identifier: 'pluginname', component: 'block_getinfos');
     }
 
     /**
@@ -38,58 +39,57 @@ class block_getinfos extends block_base {
      */
 
 
-      // --------- Ici une fonction pour déclarer si le plugin a un fichier de configuration (settings.php). Ici oui ---------
-    function has_config() {
+    // Ici une fonction pour déclarer si le plugin a un fichier de configuration (settings.php). Ici oui.
+    function has_config()
+    {
         return true;
     }
 
 
-   // -------------  La fonction qui retourne le contenu du plugin de bloc --------------------------------
-   function get_content() {
-    global $DB; // Moodle l'a initialisée auparavant. Elle permet le dialogue entre le fichier et la BDD
+    // La fonction qui retourne le contenu du plugin de bloc.
+    function get_content()
+    {
+        global $DB; // Moodle l'a initialisée auparavant. Elle permet le dialogue entre le fichier et la BDD.
 
-    if ($this->content !== null) {
-        return $this->content;
-    }
+        // On initialise une varibale "content".
+        $content = '';
 
-    // On initialise une varibale "content" 
-    $content = '';
-
-    // On récupère la valeur du paramètre "showcourses" dans le fichier de settings.php (configuration)
-    $showcourses = get_config(plugin: 'block_getinfos', name: 'showcourses');
-    // Si la valeur est "true", (donc la case est cochée), on affiche les cours dans le bloc
-    if($showcourses) {
-        $courses = $DB->get_records(table:'course'); // Je fetche les données de la table "course"
-        foreach($courses as $course) {
-            $content .= '<option value="'.$course->id.'">'.$course->shortname.' '.$course->fullname.'</option>';
+        // On récupère la valeur du paramètre "showcourses" dans le fichier de settings.php (configuration).
+        $showcourses = get_config(plugin: 'block_getinfos', name: 'showcourses');
+        // Si la valeur est "true", (donc la case est cochée), on affiche les cours dans le bloc.
+        if ($showcourses) {
+            $courses = $DB->get_records(table: 'course'); // Je fetche les données de la table "course".
+            foreach ($courses as $course) {
+                $content .= '<option value="' . $course->id . '">' . $course->shortname . ' ' . $course->fullname . '</option>';
+            }
         }
-    }
-    // Sinon on affiche les users dans le bloc
-    else {
-        $users = $DB->get_records(table:'user'); // Je fetche les données de la table "user"
-        foreach($users as $user) {
-            $content .= '<option value="'.$user->id.'">'.$user->firstname.' '.$user->lastname.'</option>';
+        // Sinon on affiche les users dans le bloc.
+        else {
+            $users = $DB->get_records(table: 'user'); // Je fetche les données de la table "user".
+            foreach ($users as $user) {
+                $content .= '<option value="' . $user->id . '">' . $user->firstname . ' ' . $user->lastname . '</option>';
+            }
         }
+
+        if (empty($this->instance)) {
+            $this->content = 'Pas de données disponibles';
+            return $this->content;
+        }
+
+        $this->content = new stdClass();
+        $this->content->text = $content;
+        $this->content->footer = 'This is the footer';
+
+        return $this->content; // On retourne notre objet "content".
     }
-
-    if (empty($this->instance)) {
-        $this->content = 'Pas de données recueillies';
-        return $this->content;
-    }
-
-    $this->content = new stdClass();
-    $this->content->text = $content;
-    $this->content->footer = 'This is the footer';
-
-    return $this->content; // On retourne notre objet "content"
-}
 
     /**
      * Defines configuration data.
      *
      * The function is called immediately after init().
      */
-    public function specialization() {
+    public function specialization()
+    {
 
         // Load user defined title and make sure it's never empty.
         if (empty($this->config->title)) {
@@ -104,7 +104,8 @@ class block_getinfos extends block_base {
      *
      * @return string[] Array of pages and permissions.
      */
-    public function applicable_formats() {
+    public function applicable_formats()
+    {
         return array(
             'all' => true,
         );
