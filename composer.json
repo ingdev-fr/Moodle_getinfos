@@ -1,0 +1,27 @@
+{
+    "name": "ingdev-fr/moodlegetinfos",
+    "description": "This is a very cool package!",
+    "keywords": [
+      "logging",
+      "cool",
+      "awesome"
+    ],
+    "time": "2023-09-06",
+    "homepage": "https://www.ingdev.fr",
+    "require": {
+      "php": "=8.0",
+        "moodlehq/moodle-cs": "*"
+    },
+    "authors": [
+      {
+        "name": "Damien Will",
+        "email": "damien.will@ingdev.fr",
+        "homepage": "https://www.ingdev.fr"
+      }
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

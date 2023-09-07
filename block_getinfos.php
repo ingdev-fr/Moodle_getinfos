@@ -21,12 +21,12 @@
  * @copyright   2023 INGDEV <damien.will@ingdev.fr>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_getinfos extends block_base
-{
+class block_getinfos extends block_base {
+
     /**
      * Initializes class member variables.
      */
-    public function init(){
+    public function init() {
         // Needed by Moodle to differentiate between blocks.
         $this->title = get_string(identifier: 'pluginname', component: 'block_getinfos');
     }
@@ -39,15 +39,13 @@ class block_getinfos extends block_base
 
 
     // Ici une fonction pour déclarer si le plugin a un fichier de configuration (settings.php). Ici oui.
-    function has_config()
-    {
+    public function has_config() {
         return true;
     }
 
 
     // La fonction qui retourne le contenu du plugin de bloc.
-    function get_content()
-    {
+    public function get_content() {
         global $DB; // Moodle l'a initialisée auparavant. Elle permet le dialogue entre le fichier et la BDD.
 
         // On initialise une varibale "content".
@@ -87,8 +85,7 @@ class block_getinfos extends block_base
      *
      * The function is called immediately after init().
      */
-    public function specialization()
-    {
+    public function specialization() {
 
         // Load user defined title and make sure it's never empty.
         if (empty($this->config->title)) {
@@ -103,8 +100,7 @@ class block_getinfos extends block_base
      *
      * @return string[] Array of pages and permissions.
      */
-    public function applicable_formats()
-    {
+    public function applicable_formats() {
         return array(
             'all' => true,
         );
