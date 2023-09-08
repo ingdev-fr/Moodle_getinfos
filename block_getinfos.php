@@ -59,9 +59,8 @@ class block_getinfos extends block_base {
             foreach ($courses as $course) {
                 $content .= '<option value="' . $course->id . '">' . $course->shortname . ' ' . $course->fullname . '</option>';
             }
-        }
-        // Sinon on affiche les users dans le bloc.
-        else {
+        } else {
+            // Sinon on affiche les users dans le bloc.
             $users = $DB->get_records(table: 'user'); // Je fetche les données de la table "user".
             foreach ($users as $user) {
                 $content .= '<option value="' . $user->id . '">' . $user->firstname . ' ' . $user->lastname . '</option>';
